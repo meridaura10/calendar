@@ -16,7 +16,7 @@ php artisan serve && npm run dev
    створити телеграм бота в базі данних та вказати ключ нище php artisan telegraph:new-bot
    першим параметром вказати ключ від телеграм бота --- 7541719230:AAFR5Tg96MsSbJO_sd3zMCreuc_uugiumlc
    далі можна все вказувати як no
-   запустити webhook - php artisan telegraph:set-webhook треба вказувати після перезапуску ngrok і пер цим змінювати в env APP_URL на новий 
+   запустити webhook - php artisan telegraph:set-webhook цю команду треба вказувати після перезапуску ngrok і перед цим змінювати в env APP_URL на новий 
 3. php artisan serve --port=8000 && npm run dev 
 4. запустити черги
    php artisan schedule:work
