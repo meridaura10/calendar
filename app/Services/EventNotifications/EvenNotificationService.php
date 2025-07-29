@@ -88,13 +88,16 @@ class EvenNotificationService implements EvenNotificationInterface
 
     public function sendTelegram(iterable $events, string $view): void
     {
-        foreach ($events as $event) {
+        try {
+            foreach ($events as $event) {
+                if ($event->user && $tg = $event->user->telegram_id) {
+                    $chat = TelegraphChat::query()->where('chat_id', $tg)->first();
 
-            if ($event->user && $tg = $event->user->telegram_id) {
-                $chat = TelegraphChat::query()->where('chat_id', $tg)->first();
-
-                $chat->message($view. $event->title)->send();
+                    $chat->message($view. $event->title)->send();
+                }
             }
+        }catch (\Throwable $throwable){
+            Log::error('error to send message telegram event notification'. $throwable->getMessage());
         }
     }
 }
