@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.content {
+    padding-top: 68px;
+    height: 100%;
+}
+
+.calendar_cell-btn {
+    opacity: 0;
+    transition: .1s;
+}
+
+.calendar_cell {
+    transition: .1s;
+}
+
+.calendar_cell:hover .calendar_cell-btn {
+    opacity: 1;
+}
+
+.calendar_cell-date {
+    opacity: 0;
+    transition: .1s;
+}
+
+.calendar_closing {
+    position: absolute;
+    width: 100%;
+    background: repeating-linear-gradient(24deg,
+    rgba(152, 179, 213, 0.85) 3px,
+    rgba(152, 179, 213, 0.85) 8px,
+    rgba(27, 4, 4, 0.15) 8px,
+    rgba(27, 4, 4, 0.15) 13px
+    );
+}
+
