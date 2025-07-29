@@ -35,13 +35,16 @@ class ReminderNotificationService implements ReminderNotificationInterface
 
     public function sendTelegram(iterable $reminders, string $view): void
     {
-        foreach ($reminders as $reminder) {
+          try {
+            foreach ($reminders as $reminder) {
+                if ($reminder->user && $tg = $reminder->user->telegram_id) {
+                    $chat = TelegraphChat::query()->where('chat_id', $tg)->first();
 
-            if ($reminder->user && $tg = $reminder->user->telegram_id) {
-                $chat = TelegraphChat::query()->where('chat_id', $tg)->first();
-
-                $chat->message($view. $reminder->title)->send();
+                    $chat->message($view. $reminder->title)->send();
+                }
             }
+        }catch (\Throwable $throwable){
+            Log::error('telegram send error reminder notitfication'. $throwable->getMessage());
         }
     }
 
